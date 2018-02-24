@@ -1,0 +1,49 @@
+package coco;
+
+import java.util.*;
+
+public class coco {
+	  public static int[] farthestTwo(int[] input) {
+		  int[] ans = new int[2];
+		  if (input == null || input.length <= 1) return null;
+		  Map<Integer, List<Integer>> index = new HashMap<>();
+		  for (int i = 0; i < input.length; i++) {
+			  if (!index.containsKey(input[i])) {
+				  index.put(input[i], new ArrayList<Integer>());
+			  }
+			  index.get(input[i]).add(i);
+		  }
+		  Arrays.sort(input);
+		  int max = Integer.MIN_VALUE;
+		  for (int i = 0; i < input.length - 1; i++) {
+			  if (input[i] != input[i + 1]) {
+				  int tmp = getFurthest(input[i], input[i + 1], index);
+				  if (tmp > max) {
+					  max = tmp;
+					  ans[0] = input[i];
+					  ans[1] = input[i + 1];
+				  }
+			  }
+		  }
+		  return ans;
+	  }
+	  
+	  private static int getFurthest(int a, int b, Map<Integer, List<Integer>> map) {
+		  List<Integer> index_a = map.get(a);
+		  List<Integer> index_b = map.get(b);
+		  int max = Integer.MIN_VALUE;
+		  for (int i : index_a) {
+			  for (int j : index_b) {
+				  if (Math.abs(i - j) > max) max = Math.abs(i - j);
+			  }
+		  }
+		  return max;
+	  }
+	  
+	  public static void main(String[] args) {
+		  int[] input = {2,8,7,6,1};
+		  int[] ans = farthestTwo(input);
+		  System.out.println(ans[0]);
+		  System.out.println(ans[1]);
+	  }
+}

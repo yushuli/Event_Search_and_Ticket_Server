@@ -1,0 +1,36 @@
+package coco;
+
+import java.util.*;
+
+public class coco {
+	  public static int shortestPath(int[] input) {
+		  Map<Integer, Integer> count = new HashMap<>();
+		  for (int i : input) {
+			  if (!count.containsKey(i)) count.put(i, 1);
+		  }
+		  int length = input.length;
+		  int visited = 0;
+		  int left = 0;
+		  for (int right = 0; right < input.length; right++) {
+			  count.put(input[right], count.get(input[right]) - 1);
+			  if (count.get(input[right]) == 0) {
+				  visited++;
+			  }
+			  while (visited == count.size()) {
+				  length = Math.min(length, right - left + 1);
+				  count.put(input[left], count.get(input[left]) + 1);
+				  if (count.get(input[left]) > 0) {
+					  visited--;
+				  }
+				  left++;
+			  }
+		  }
+		  return length;
+	  }
+	  
+	  public static void main(String[] args) {
+		  int[] input = {7,3,7,3,1,3,4,1};
+		  int ans = shortestPath(input);
+		  System.out.println(ans);
+	  }
+}

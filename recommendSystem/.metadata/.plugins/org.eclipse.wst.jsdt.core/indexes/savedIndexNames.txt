@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+/Users/LiYushu/Documents/Umich_study /Project/recommendSystem/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+1156283646.index
+2603907831.index
+3334097638.index
+1234244087.index
+1802749617.index
+1963942311.index
